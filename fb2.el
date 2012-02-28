@@ -50,5 +50,18 @@ will be converted to
         (replace-match " " nil t)))))
 
 
+(defun fb2-remove-emphasis-in-region (point mark)
+  "Remove all <emphasis> and </emphasis> in the region."
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region point mark)
+      (beginning-of-buffer)
+      (while (search-forward "<emphasis>" nil t)
+        (replace-match "" nil t))
+      (beginning-of-buffer)
+      (while (search-forward "</emphasis>" nil t)
+        (replace-match "" nil t)))))
+
 (provide 'fb2)
 ;;; fb2.el ends here
