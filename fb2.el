@@ -63,5 +63,33 @@ will be converted to
       (while (search-forward "</emphasis>" nil t)
         (replace-match "" nil t)))))
 
+
+(defun fb2-break-paragraph-at-point ()
+  ""
+  (interactive)
+  (insert "</p>\n<p>"))
+
+(defun fb2-put-emphasis-on-region (point mark)
+  "Insert <emphasis> and </emphasis> tags at the ends of the region."
+  (interactive "r")
+  (fb2-put-tag-on-region point mark "emphasis"))
+
+
+(defun fb2-put-text-author-on-region (point mark)
+  "Insert <text-author> and </text-author> tags at the ends of the region."
+  (interactive "r")
+  (fb2-put-tag-on-region point mark "text-author"))
+
+
+
+(defun fb2-put-tag-on-region (point mark tag)
+  "Insert <tag> and </tag> at the ends of the region."
+  (interactive "r")
+  (save-excursion
+    (goto-char mark)
+    (insert (concat "</" tag ">"))
+    (goto-char point)
+    (insert (concat "<" tag ">"))))
+
 (provide 'fb2)
 ;;; fb2.el ends here
