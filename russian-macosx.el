@@ -4,7 +4,7 @@
 
 ;;; Code:
 (quail-define-package
- "russian-macoxs" "Russian" "RU" nil
+ "russian-macosx" "Russian" "RU" nil
  "ЙЦУКЕН Russian computer layout"
  nil t t t t nil nil nil nil nil t)
 
@@ -108,7 +108,9 @@
  ("M" ?Ь)
  ("<" ?Б)
  (">" ?Ю)
- ("?" ??))
+ ("?" ??)
+ ("§" ?<)
+ ("±" ?>))
 
 
 ;; Local Variables:
