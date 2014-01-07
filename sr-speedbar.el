@@ -7,11 +7,11 @@
 ;; Copyright (C) 2008, 2009, Andy Stewart, all rights reserved.
 ;; Copyright (C) 2009, Peter Lunicks, all rights reversed.
 ;; Created: 2008
-;; Version: 0.1.8
-;; Last-Updated: 2009-07-23 12:35:12
+;; Version: 0.1.9
+;; Last-Updated: 2013-03-09 20:56:35
 ;; URL: http://www.emacswiki.org/emacs/download/sr-speedbar.el
 ;; Keywords: speedbar, sr-speedbar.el
-;; Compatibility: GNU Emacs 21 ~ GNU Emacs 23
+;; Compatibility: GNU Emacs 22 ~ GNU Emacs 24
 ;;
 ;; Features that might be required by this library:
 ;;
@@ -95,6 +95,10 @@
 ;;
 
 ;;; Change log:
+;;
+;; * 09 March 2013:
+;;   * Tharre:
+;;      * Remove Emacs 21 compatibility code as it fails to compile on Emacs 24.
 ;;
 ;; * 20 July 2009:
 ;;   * Peter Lunicks:
@@ -326,6 +330,7 @@ Default is nil."
   "The last refresh dictionary record of 'sr-speedbar-refresh'.")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Interactive functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;###autoload
 (defun sr-speedbar-toggle ()
   "Toggle sr-speedbar window.
 Toggle visibility of sr-speedbar by resizing
@@ -338,6 +343,7 @@ of a speedbar-window.  It will be created if necessary."
       (sr-speedbar-close)
     (sr-speedbar-open)))
 
+;;;###autoload
 (defun sr-speedbar-open ()
   "Create `sr-speedbar' window."
   (interactive)
@@ -369,11 +375,6 @@ of a speedbar-window.  It will be created if necessary."
           (speedbar-reconfigure-keymaps)
           (speedbar-update-contents)
           (speedbar-set-timer 1)
-          ;; Emacs 21 compatibility.
-          (when (<= emacs-major-version 21)
-            (eval-when-compile
-              (with-no-warnings
-                (make-local-hook 'kill-buffer-hook))))
           ;; Add speedbar hook.
           (add-hook 'speedbar-before-visiting-file-hook 'sr-speedbar-before-visiting-file-hook t)
           (add-hook 'speedbar-before-visiting-tag-hook 'sr-speedbar-before-visiting-tag-hook t)
